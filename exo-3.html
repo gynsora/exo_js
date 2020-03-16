@@ -7,6 +7,7 @@
     <title>Document exo 3 Nadjim Djamani</title>
 </head>
 <body>
+    <h1>Exo 3</h1>
     saisir le nom d'un ville : <br>
    <input type="text" id="city">  
    <div id="cityResult"></div>
@@ -14,59 +15,55 @@
 </body>
 <script>
     (function() {
-        // Constants
-        const CITY_MIN_LEN = 2 ;
-        const cities = [
+         // Constants
+        const CITIES = [
             { name: 'Paris', population: 2187526 },
             { name: 'Marseille', population: 863310 },
             { name: 'Lyon', population: 516092 },
             { name: 'Toulouse', population: 479553 },
+            { name: 'Toulon', population: 171000 },
             { name: 'Nice', population: 340017 },
-            { name: 'Niort', population: 340087 }
+            { name: 'Nîmes', population: 150610 },
+            { name: 'Tournai', population: 147705 },
+            { name: 'Palermo', population: 500000 },
         ];
-
+        
         // DOM targetting
-        let txtCity        = document.getElementById('city');
-        let divCityResult  = document.getElementById('cityResult');
-        
+        let txtCity     = document.getElementById('city');
+        let listCities  = document.getElementById('cityResult');
+        let secDetails  = document.getElementById('population');
+
         // Events
-        txtCity.addEventListener('keyup', e => checkConditions(e));
-        
+        txtCity.addEventListener('keyup', e => {
+            let input = e.target.value;
+            listCities.innerHTML = ''; // clear
+            if (input.length >= 2) showResults(searchCity(input));
+        })
+
         // Functions
-        function checkConditions(e) {
-            let isCityLengthOK = txtCity.value.length >= CITY_MIN_LEN;
-            if (isCityLengthOK ) {
-                autoCompletion();
-            }
-            else{
-                divCityResult.innerHTML = "" ;
-            }
+        function searchCity(input) {
+            return CITIES.filter(c => c.name.startsWith(input));
         }
 
-        function autoCompletion(){
-            divCityResult.innerHTML = "<div><ul>" ;
-            let cityValue = txtCity.value.trim();
-
-            for(let i = 0; i < cities.length; i++) {
-                let cityVisible = cities[i].name.includes(cityValue);
-                if(cityVisible){
-                    divCityResult.innerHTML += "<li class=\"cityClicable\"  >"+cities[i].name +"</li>" ;
-                }
-            }
-            divCityResult.innerHTML += "</ul></div>" ;
-
-
-            let cityClicable   = document.getElementsByClassName('cityClicable') ;
-            for(let i = 0; i < cityClicable.length; i++) {
-                cityClicable[i].addEventListener("click", function() {
-                    console.log("Clicked index: " + i);
-                    console.log(cityClicable[i].innerHTML)
-                    
-                });
-            }
+        function showResults(results) {
+            results.forEach(r => {
+                let c = document.createElement('li');
+                c.innerText = r.name;
+                c.addEventListener('click', showDetails);
+                listCities.appendChild(c);
+            })
         }
 
-      
+        function showDetails(e) {
+            let city = CITIES.filter(c => c.name == e.target.innerText)[0];
+            secDetails.innerHTML = `
+                <h2>${city.name}</h2>
+                <p>Population: ${city.population}</p>
+            `;
+            listCities.innerHTML = '';
+            txtCity.value = '';
+        }
+        
             
 
     })();
