@@ -17,19 +17,28 @@
         <option value="100">2000</option>
         <option value="100">2500</option>
     </select><br>
-    <button type="submit" id="submitButton" onclick="repeatCaracters()">valider</button><br>
+    <button type="submit" id="submitButton" >valider</button><br>
     <div id="showResult"></div>
 </body>
 <script>
-    
-    function repeatCaracters(){
-        let caracterSelected = document.getElementById("oneCharacterSelected").value.trim();
-        let repeatNumber = parseInt(document.getElementById("repeatNumber").value.trim());
-        let showResult = document.getElementById("showResult")
-        for(let i = 0; i< repeatNumber ; i++){
-            showResult.innerHTML += caracterSelected ;
-        }
-        //console.log(repeatNumber);
-    }
+    (function() {
+
+        // DOM targetting
+        let txtChar         = document.getElementById('oneCharacterSelected');
+        let selNum          = document.getElementById('repeatNumber');
+        let btnGo           = document.getElementById('submitButton');
+        let divResult       = document.getElementById('showResult');
+       
+        // Events
+        btnGo.addEventListener('click', e => {
+            divResult.innerText = ''; // clear input
+            let concat = '';
+            let nb = parseInt(selNum.value.trim());
+            for (i=0; i<nb;i++) concat += txtChar.value ;
+            divResult.innerText = concat;
+        })
+
+
+    })();
 </script>
 </html>
