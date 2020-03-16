@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document exo Nadjim Djamani</title>
+</head>
+<body>
+    saisir un caractère :  <br>
+    <input type="text" id="oneCharacterSelected"><br>
+    choisir le nombre de fois ou le caractère sera repeter :  <br>
+    <select name="repeatNumber" id="repeatNumber">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="100">2000</option>
+        <option value="100">2500</option>
+    </select><br>
+    <button type="submit" id="submitButton" onclick="repeatCaracters()">valider</button><br>
+    <div id="showResult"></div>
+</body>
+<script>
+    
+    function repeatCaracters(){
+        let caracterSelected = document.getElementById("oneCharacterSelected").value.trim();
+        let repeatNumber = parseInt(document.getElementById("repeatNumber").value.trim());
+        let showResult = document.getElementById("showResult")
+        for(let i = 0; i< repeatNumber ; i++){
+            showResult.innerHTML += caracterSelected ;
+        }
+        //console.log(repeatNumber);
+    }
+</script>
+</html>
