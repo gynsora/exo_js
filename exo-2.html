@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document exo Nadjim Djamani</title>
+</head>
+<body>
+    <form action="" method="get" id="form">
+        Name: <input type="text" size="10" name="name" id="txtName"/><br />
+	    Password: <input type="password" size="10"  name="password" id="txtPassword"/><br />
+	
+	    <input type="submit" value="valider" id="btnValider" disabled/>
+    </form>
+</body>
+<script>
+    (function() {
+
+        // DOM targetting
+        let txtName         = document.getElementById('txtName');
+        let txtPassword     = document.getElementById('txtPassword');
+        let btnValider      = document.getElementById('btnValider');
+        
+        // Events
+        txtName.addEventListener('keyup', e => {
+            
+            if(txtName.value.length >= 3 ){
+                console.log("bonne saisie name");
+            }
+            enableValidate();
+        });
+
+        txtPassword.addEventListener('keyup', e => {
+            if(txtPassword.value.length >= 8 ){
+                console.log("bonne saisie password");         
+            }
+            enableValidate();
+        });
+        
+        function enableValidate(){
+           
+            if(txtName.value.length >=3 && txtPassword.value.length >=8){
+                btnValider.disabled = false;
+            }
+            else{
+                btnValider.disabled = true;
+            }
+        }
+       
+      
+
+    })();
+</script>
+</html>
