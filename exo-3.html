@@ -55,6 +55,7 @@
         }
 
         function showDetails(e) {
+            //filter c =(element) e=(event)
             let city = CITIES.filter(c => c.name == e.target.innerText)[0];
             secDetails.innerHTML = `
                 <h2>${city.name}</h2>
