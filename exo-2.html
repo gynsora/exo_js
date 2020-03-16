@@ -16,39 +16,53 @@
 </body>
 <script>
     (function() {
+        // Constants
+        const NAME_MIN_LEN  = 3;
+        const PWD_MIN_LEN   = 6;
 
         // DOM targetting
         let txtName         = document.getElementById('txtName');
-        let txtPassword     = document.getElementById('txtPassword');
-        let btnValider      = document.getElementById('btnValider');
-        
-        // Events
-        txtName.addEventListener('keyup', e => {
-            
-            if(txtName.value.length >= 3 ){
-                console.log("bonne saisie name");
-            }
-            enableValidate();
-        });
+        let txtPwd          = document.getElementById('txtPassword');
+        let btnSubmit       = document.getElementById('btnValider');
 
-        txtPassword.addEventListener('keyup', e => {
-            if(txtPassword.value.length >= 8 ){
-                console.log("bonne saisie password");         
+        // Events
+        txtName.addEventListener('keyup', e => checkConditions(e))
+        txtPwd.addEventListener('keyup', e => checkConditions(e))
+
+        // Functions
+        function checkConditions(e) {
+            let disabled = true; // bouton désactivé par défaut
+            let isNameLengthOk  = txtName.value.length >= NAME_MIN_LEN;
+            let isPwdLengthOk   = txtPwd.value.length >= PWD_MIN_LEN;
+
+            if (isNameLengthOk && isPwdLengthOk) {
+                //console.log('hasANumberValue', hasANumberValue(txtPwd.value));
+                //console.log('HasAUpperCaseValue', HasAUpperCaseValue(txtPwd.value));
+                disabled =  !(hasANumberValue(txtPwd.value) && HasAUpperCaseValue(txtPwd.value));
             }
-            enableValidate();
-        });
-        
-        function enableValidate(){
-           
-            if(txtName.value.length >=3 && txtPassword.value.length >=8){
-                btnValider.disabled = false;
-            }
-            else{
-                btnValider.disabled = true;
-            }
+
+            btnSubmit.disabled = disabled;
         }
-       
-      
+
+        function hasANumberValue(str) {
+            for(let i=0; i<str.length; i++)
+                if (!isNaN(str[i])) return true;
+            return false;
+        }
+
+        function HasAUpperCaseValue(str) {
+            for(let i=0; i<str.length; i++)
+                if (isUpperCase(str[i])) return true;
+            return false;
+        }
+
+        // Variante sytaxique. La fonction est ici assignée à une variable. 
+        // La fonction exécute une expression régulière (regexp) renvoyant
+        // true si la totalité de la chaîne est en haut de casse.
+        //function fléchée
+        const isUpperCase = (str) => /^[A-Z]*$/.test(str);
+
+            
 
     })();
 </script>
