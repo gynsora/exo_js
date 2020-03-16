@@ -39,7 +39,7 @@
             for(let i =0;i<classInputResult.length ; i++){
                 if(parseInt(classInputResult[i].value) == calculate(calculations[i])){ goodAnswer += 1;}
             }
-            divContainer.innerHTML += ` bonnes ${goodAnswer} réponses sur ${classInputResult.length}` ;
+            divContainer.innerHTML += `${goodAnswer}  bonnes réponses sur ${classInputResult.length}` ;
         }
 
         function calculate(calculObject){
