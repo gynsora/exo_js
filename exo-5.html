@@ -51,6 +51,7 @@
         function getTopics() {
             let topics = [];
             QUOTES.forEach(q => {
+                //si le parametre n'est pas indexé (dou le -1) topics.indexOf(q.topic) == -1
                 if (topics.indexOf(q.topic) == -1) topics.push(q.topic);
             })
             return topics;
