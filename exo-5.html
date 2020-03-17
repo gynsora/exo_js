@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document exo 5 Nadjim DJAMANI</title>
+</head>
+<body>
+    <h1>Exo 5</h1>
+    choisir un theme :  <br>
+    <select name="themeSelected" id="themeSelected">
+        <option value="Oiseau">Oiseau</option>
+        <option value="Poisson">Poisson</option>
+    </select><br>
+    <button type="submit" id="btnValidate" value="valider">valider</button>
+    <div id="showQuotes"></div>
+</body>
+<script>
+    (function() {
+         // Constants
+        const QUOTES = [
+            { topic: 'Oiseau', body: 'corbeau' },
+            { topic: 'Oiseau', body: 'faucon' },
+            { topic: 'Poisson', body: 'poisson-chat' },
+            { topic: 'Poisson', body: 'saumon' },
+            { topic: 'Poisson', body: 'thon' }
+        ];
+        let chronos;
+
+        // DOM targetting
+        let themeSelected = document.getElementById('themeSelected');
+        let btnValidate   = document.getElementById('btnValidate');
+        let divShowQuotes = document.getElementById('showQuotes');
+
+        // Events
+        btnValidate.addEventListener('click', e => {
+            //console.log(themeSelected.value);
+            randomQuotes(themeSelected.value);
+
+        })
+
+        function randomQuotes(topicSelected){
+            clearInterval(chronos) ;
+            let listQuotesEnable = [];
+            divShowQuotes.innerHTML = '' ;
+            QUOTES.forEach(element => {
+                if(topicSelected == element.topic){
+                    //console.log(element.topic);
+                    listQuotesEnable.push(element);
+                }
+            });
+            //console.log(listQuotesEnable);
+            let listQuotesEnableLength = listQuotesEnable.length ;
+            generateNewQuotes(listQuotesEnable,listQuotesEnableLength);
+
+
+        }
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+        
+        function generateNewQuotes(tabQuotes,tabLength) {
+            chronos = setInterval(function(){ 
+                divShowQuotes.innerHTML = '' ;
+                let randomIndice = getRandomInt(tabLength);
+                let newQuotes = tabQuotes[randomIndice];
+                divShowQuotes.innerHTML = newQuotes.body ;  
+            }, 1000);
+        }
+
+    })();
+</script>
+</html>
