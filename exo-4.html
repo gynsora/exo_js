@@ -38,6 +38,11 @@
             let goodAnswer = 0 ;
             for(let i =0;i<classInputResult.length ; i++){
                 if(parseInt(classInputResult[i].value) == calculate(calculations[i])){ goodAnswer += 1;}
+                /*
+                else{
+                    divContainer.innerHTML += ` ${calculations[i].operand1} ${calculations[i].operator} ${calculations[i].operand2} 
+                    est égal à  ${calculate(calculations[i])} </br>` ;
+                }*/
             }
             divContainer.innerHTML += `${goodAnswer}  bonnes réponses sur ${classInputResult.length}` ;
         }
